@@ -1,7 +1,8 @@
-public class Triangle extends TwoDShape {
+public class Triangle extends TwoDShape implements Rotate {
     private double side1;
     private double side2;
     private double side3;
+    private double currentRotation;
 
     // Constructors
     // As I'm not able to calculate three sides with the given width and height, I assume the constructor
@@ -11,6 +12,7 @@ public class Triangle extends TwoDShape {
         this.side1 = width;
         this.side2 = height;
         this.side3 = Math.sqrt(width * width + height * height);
+        this.currentRotation = 0;
     }
 
     public Triangle(double side1, double side2, double side3) {
@@ -18,6 +20,7 @@ public class Triangle extends TwoDShape {
         this.side1 = side1;
         this.side2 = side2;
         this.side3 = side3;
+        this.currentRotation = 0;
         super.setHeight(heronsHeight());
     }
 
@@ -51,8 +54,30 @@ public class Triangle extends TwoDShape {
     public void setSide3(double side3) {
         this.side3 = side3;
     }
+
     @Override
     public String toString() {
-        return "Triangle with sides: " + side1 + ", " + side2 + ", " + side3 + ", with Area: "+ getArea();
+        return "Triangle [sides: " + side1 + ", " + side2 + ", " + side3 + ", rotation: " + currentRotation + " degrees]";
     }
+
+    // Rotate implementations
+    // Rotate implementations
+    @Override
+    public void rotate90() {
+        currentRotation = (currentRotation + 90) % 360;
+        System.out.println("Triangle rotated 90 degrees.");
+    }
+
+    @Override
+    public void rotate180() {
+        currentRotation = (currentRotation + 180) % 360;
+        System.out.println("Triangle rotated 180 degrees.");
+    }
+
+    @Override
+    public void rotate(double degree) {
+        currentRotation = (currentRotation + degree) % 360;
+        System.out.println("Triangle rotated " + degree + " degrees.");
+    }
+
 }
